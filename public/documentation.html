@@ -30,22 +30,29 @@
         <td></td>
       </tr>
       <tr>
-        <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
-        <td>/movies/[Name]</td>
-        <td>Get</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-        <td>/movies/[Genre]</td>
+        <td>Return a list of ALL directors to the users</td>
+        <td>/movies/directors</td>
         <td>Get</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
         <td>Return data about a director (bio, birth year, death year) by name</td>
-        <td>/movies/[Director]</td>
+        <td>/movies/directors/[Name]</td>
+        <td>Get</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+        <td>/movies/[Title]</td>
+        <td>Get</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Return a list of all movies of a certain genre</td>
+        <td>/movies/[Title]/[Genre]</td>
         <td>Get</td>
         <td></td>
         <td></td>
