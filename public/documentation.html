@@ -30,29 +30,22 @@
         <td></td>
       </tr>
       <tr>
-        <td>Return a list of ALL directors to the users</td>
-        <td>/movies/directors</td>
-        <td>Get</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
         <td>Return data about a director (bio, birth year, death year) by name</td>
-        <td>/movies/directors/[Name]</td>
+        <td>/movies/directors/[name]</td>
         <td>Get</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
         <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
-        <td>/movies/[Title]</td>
+        <td>/movies/[title]</td>
         <td>Get</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
-        <td>Return a list of all movies of a certain genre</td>
-        <td>/movies/[Title]/[Genre]</td>
+        <td>Return data about a genre (description) by name/title (e.g., “Thriller”);</td>
+        <td>/movies/genres/[name]</td>
         <td>Get</td>
         <td></td>
         <td></td>
@@ -66,28 +59,28 @@
       </tr>
       <tr>
         <td>Allow users to update their user info (username)</td>
-        <td>/users/[Name]</td>
+        <td>/users/[name]</td>
         <td>Put</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
-        <td>/users/[Name]/favorites</td>
+        <td>/users/[name]/favorites/[movieID]</td>
         <td>Post</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
-        <td>/users/[Name]/favorites/</td>
+        <td>/users/[name]/favorites/[movieID]</td>
         <td>Delete</td>
         <td></td>
         <td></td>
       </tr>
       <tr>
         <td>Allow existing users to deregister (showing only a text that a user email has been removed—more on this later).</td>
-        <td>/users/[Name]</td>
+        <td>/users/[name]</td>
         <td>Delete</td>
         <td></td>
         <td></td>

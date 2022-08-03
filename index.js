@@ -47,19 +47,6 @@ let topMovies = [
 
   ];
 
-  let directors = [
-    {
-        name: 'Guy Ritchie',
-        bio: 'Blank',
-        dob: '1968'        
-    },
-    {
-        name: 'Andrew Stanton',
-        bio: 'Also blank',
-        dob: '1965'
-    }
-    
-  ]
 
 
     app.use(morgan('common'));
@@ -73,24 +60,20 @@ let topMovies = [
         res.json(topMovies);
     });
 
-    app.get('/movies/directors', (req, res) => {
-      res.json(directors);
-    });
 
     app.get('/movies/directors/:name', (req, res) => {
-        res.json(directors.find((director) => 
-        {return director.name === req.params.name}));
+        res.send('successful get request');
     });
   
     app.get('/movies/:title', (req, res) => {
-      res.json(topMovies.find((movie) => 
-      {return movie.title === req.params.title}));
+    //   res.json(topMovies.find((movie) => 
+    //   {return movie.title === req.params.title}));
+    res.send('successful get request');
     });
     
-    // app.get('/movies/:genre', (req, res) => {
-    //     res.json(topMovies.find((movie) => 
-    //     {return movie.title === req.params.title}));
-    // });//incomplete
+    app.get('/movies/genres/:genre', (req, res) => {
+        res.send('successful get request');
+    });
     
 
     app.post('/users', (req, res) => {
@@ -98,14 +81,14 @@ let topMovies = [
     });
 
     app.put('/users/:name', (req, res) => {
-    //code hre
+        res.send('successful put request');
     });
 
-    app.post('/users/:name/favorites', (req, res) => {
+    app.post('/users/:name/favorites/:movieID', (req, res) => {
     //code here
     });
   
-    app.delete('/users/:name/favorites', (req, res) => {
+    app.delete('/users/:name/favorites/:movieID', (req, res) => {
     //code here
     });
 
