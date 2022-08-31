@@ -26,75 +26,253 @@
         <td>Return a list of ALL movies to the user</td>
         <td>/movies</td>
         <td>Get</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Genre": {
+      "Name": "Thriller",
+      "Description": "The Thriller is a..."
+  },
+  "Director": {
+      "Name": "Jonathan Demme",
+      "Bio": "Robert Jonathan Demme was an...",
+      "Birth": "1944",
+      "Death": "2017"
+  },
+  "Actors": [],
+  "_id": "630522654f2fcbd246a9bfad",
+  "Title": "Silence of the Lambs",
+  "Description": "A young FBI cadet must...",
+  "ImagePath": "silenceofthelambs.png",
+  "Featured": true
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Return data about a director (bio, birth year, death year) by name</td>
-        <td>/movies/directors/[name]</td>
+        <td>/movies/directors/[director]</td>
         <td>Get</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+"Name": "Guy Ritchie",
+"Bio": "Guy Stuart Ritchie is an English...",
+"Birth": "1968"
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
         <td>/movies/[title]</td>
         <td>Get</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Genre": {
+      "Name": "Thriller",
+      "Description": "The Thriller is a..."
+  },
+  "Director": {
+      "Name": "Jonathan Demme",
+      "Bio": "Robert Jonathan Demme was an...",
+      "Birth": "1944",
+      "Death": "2017"
+  },
+  "Actors": [],
+  "_id": "630522654f2fcbd246a9bfad",
+  "Title": "Silence of the Lambs",
+  "Description": "A young FBI cadet must...",
+  "ImagePath": "silenceofthelambs.png",
+  "Featured": true
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Return data about a genre (description) by name/title (e.g., “Thriller”);</td>
         <td>/movies/genres/[genre]</td>
         <td>Get</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Name": "Dark Comedy",
+  "Description": "Dark comedies focus on humor but..."
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Allow new users to register</td>
         <td>/users</td>
         <td>Post</td>
-        <td></td>
-        <td></td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "test1",
+  "Password": "testpass",
+  "Email": "testmail@gmail.com"
+}
+            </code>
+          </pre>
+        </td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "test1",
+  "Password": "testpass",
+  "Email": "testmail@gmail.com",
+  "FavoriteMovies": [],
+  "_id": "630f3ebf7d2479d24e79ba36",
+  "__v": 0
+} 
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Allow users to update their user info (username)</td>
         <td>/users/[username]</td>
         <td>Put</td>
-        <td></td>
-        <td></td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "updatedName",
+  "Password": "updatedPass",
+  "Email": "updated@gmail.com"
+}              
+            </code>
+          </pre>
+        </td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630f3ebf7d2479d24e79ba36",
+  "Username": "updatedName",
+  "Password": "updatedPass",
+  "Email": "updated@gmail.com",
+  "FavoriteMovies": [],
+  "__v": 0
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Find all users</td>
         <td>/users</td>
         <td>Get</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Find user by username</td>
         <td>/users/[username]</td>
-        <td>Get
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+            </code>
+          </pre>
+        </td>
       <tr>
         <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
-        <td>/users/[name]/favorites/[movieID]</td>
+        <td>/users/[username]/movies/[movieID]</td>
         <td>Post</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "Birthday": "1990-01-01T00:00:00.000Z",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae",
+      "6306241657b81ef6899eefa7"
+  ]
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
-        <td>/users/[name]/favorites/[movieID]</td>
+        <td>/users/[username]/movies/[movieID]</td>
         <td>Delete</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "Birthday": "1990-01-01T00:00:00.000Z",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+            </code>
+          </pre>
+        </td>
       </tr>
       <tr>
         <td>Allow existing users to deregister (showing only a text that a user email has been removed—more on this later).</td>
-        <td>/users/[name]</td>
+        <td>/users/[username]</td>
         <td>Delete</td>
-        <td></td>
-        <td></td>
+        <td>None</td>
+        <td>
+          "[username] was deleted."
+        </td>
       </tr>
 
     </table>
