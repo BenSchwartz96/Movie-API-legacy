@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://localhost:4200', 'http://testsite.com', 'https://bms-myflix.netlify.app', 'https://benschwartz96.github.io/myflix_angular'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://localhost:4200', 'http://testsite.com', 'https://bms-myflix.netlify.app', 'https://benschwartz96.github.io'];
 
 app.use(cors({
   origin: (origin, callback) => {
