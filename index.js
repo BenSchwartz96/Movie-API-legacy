@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const express = require('express'),
   morgan = require('morgan');
 
-const { check, validationResult } = require('express-validator');
+const { body, check, validationResult } = require('express-validator');
 const app = express();
 
 app.use(bodyParser.json());
@@ -130,12 +130,12 @@ app.get('/movies/genres/:genre', passport.authenticate('jwt', { session: false }
 
 
 //For posting a user        
-app.post('/users', (req, res) => {
+app.post('/users',
   [
-    check('Username', 'A username with 5+ characters is required').isLength({ min: 5 }),
-    check('Username', 'Username contains non-alphanumeric characters.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'This email does not appear to be valid').isEmail()
+    body('Username', 'A username with 5+ characters is required').isLength({ min: 5 }),
+    body('Username', 'Username contains non-alphanumeric characters.').isAlphanumeric(),
+    body('Password', 'Password is required').not().isEmpty(),
+    body('Email', 'This email does not appear to be valid').isEmail()
   ], (req, res) => {
 
     let errors = validationResult(req);
@@ -143,50 +143,48 @@ app.post('/users', (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-  }
 
-  let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
-      } else {
-        Users
-          .create({
-            Username: req.body.Username,
-            Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-          })
-          .then((user) => { res.status(201).json(user) })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error)
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error)
-    });
-});
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.Username + 'already exists');
+        } else {
+          Users
+            .create({
+              Username: req.body.Username,
+              Password: hashedPassword,
+              Email: req.body.Email,
+              Birthday: req.body.Birthday
+            })
+            .then((user) => { res.status(201).json(user) })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send('Error: ' + error)
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error)
+      });
+  });
 
 //For updating a user
 app.put('/users/:username', passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    [
-      check('Username', 'A username with 5+ characters is required').isLength({ min: 5 }),
-      check('Username', 'Username contains non-alphanumeric characters.').isAlphanumeric(),
-      check('Password', 'Password is required').not().isEmpty(),
-      check('Email', 'This email does not appear to be valid').isEmail()
-    ], (req, res) => {
+  [
+    body('Username', 'A username with 5+ characters is required').isLength({ min: 5 }),
+    body('Username', 'Username contains non-alphanumeric characters.').isAlphanumeric(),
+    body('Password', 'Password is required').not().isEmpty(),
+    body('Email', 'This email does not appear to be valid').isEmail()
+  ], (req, res) => {
 
-      let errors = validationResult(req);
+    let errors = validationResult(req);
 
-      if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-      }
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
     }
+
 
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({ Username: req.params.username },
