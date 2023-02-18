@@ -1,0 +1,339 @@
+<!-- MOVIE API -->
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie API - Documentation</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+
+  <body>
+
+    <table class="documentation-table">
+      <tr>
+        <th>Business Logic</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+        <th>Authentication</th>
+      </tr>
+
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+[
+              {
+  "Genre": {
+      "Name": "Thriller",
+      "Description": "The Thriller is a..."
+  },
+  "Director": {
+      "Name": "Jonathan Demme",
+      "Bio": "Robert Jonathan Demme was an...",
+      "Birth": "1944",
+      "Death": "2017"
+  },
+  "Actors": [],
+  "_id": "630522654f2fcbd246a9bfad",
+  "Title": "Silence of the Lambs",
+  "Description": "A young FBI cadet must...",
+  "ImagePath": "silenceofthelambs.png",
+  "Featured": true
+}
+]
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Return data about a director (bio, birth year, death year) by name</td>
+        <td>/movies/directors/[director]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+"Name": "Guy Ritchie",
+"Bio": "Guy Stuart Ritchie is an English...",
+"Birth": "1968"
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+        <td>/movies/[title]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Genre": {
+      "Name": "Thriller",
+      "Description": "The Thriller is a..."
+  },
+  "Director": {
+      "Name": "Jonathan Demme",
+      "Bio": "Robert Jonathan Demme was an...",
+      "Birth": "1944",
+      "Death": "2017"
+  },
+  "Actors": [],
+  "_id": "630522654f2fcbd246a9bfad",
+  "Title": "Silence of the Lambs",
+  "Description": "A young FBI cadet must...",
+  "ImagePath": "silenceofthelambs.png",
+  "Featured": true
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Return data about a genre (description) by name/title (e.g., “Thriller”);</td>
+        <td>/movies/genres/[genre]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Name": "Dark Comedy",
+  "Description": "Dark comedies focus on humor but..."
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>Post</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "test1",
+  "Password": "testpass",
+  "Email": "testmail@gmail.com",
+  "Birthday": ISODate("2000-01-01T00:00:00.000Z")
+}
+            </code>
+          </pre>
+        </td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "test1",
+  "Password": "testpass",
+  "Email": "testmail@gmail.com",
+  "Birthday": ISODate("2000-01-01T00:00:00.000Z"),
+  "FavoriteMovies": [],
+  "_id": "630f3ebf7d2479d24e79ba36",
+  "__v": 0
+} 
+            </code>
+          </pre>
+        </td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user info (username)</td>
+        <td>/users/[username]</td>
+        <td>Put</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "updatedName",
+  "Password": "updatedPass",
+  "Email": "updated@gmail.com",
+  "Birthday": ISODate("2000-01-01T00:00:00.000Z")
+}              
+            </code>
+          </pre>
+        </td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630f3ebf7d2479d24e79ba36",
+  "Username": "updatedName",
+  "Password": "updatedPass",
+  "Email": "updated@gmail.com",
+  "FavoriteMovies": [],
+  "__v": 0
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Find all users</td>
+        <td>/users</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+[
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+]
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Find user by username</td>
+        <td>/users/[username]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</td>
+        <td>/users/[username]/movies/[movieID]</td>
+        <td>Post</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "Birthday": "1990-01-01T00:00:00.000Z",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae",
+      "6306241657b81ef6899eefa7"
+  ]
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</td>
+        <td>/users/[username]/movies/[movieID]</td>
+        <td>Delete</td>
+        <td>None</td>
+        <td>
+          <pre>
+            <code>
+{
+  "_id": "630627d457b81ef6899eefb1",
+  "Username": "GuyMannington",
+  "Password": "pass2",
+  "Email": "guymannington@email.com",
+  "Birthday": "1990-01-01T00:00:00.000Z",
+  "FavoriteMovies": [
+      "6306247557b81ef6899eefa9",
+      "630624e157b81ef6899eefae"
+  ]
+}
+            </code>
+          </pre>
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister (showing only a text that a user email has been removed—more on this later).</td>
+        <td>/users/[username]</td>
+        <td>Delete</td>
+        <td>None</td>
+        <td>
+          "[username] was deleted."
+        </td>
+        <td>JWT bearer token</td>
+      </tr>
+      <tr>
+        <td>Allow existing users to log on</td>
+        <td>/login</td>
+        <td>Post</td>
+        <td>
+          <pre>
+            <code>
+{
+  "Username": "test1",
+  "Password": "testpass",
+}
+            </code>
+          </pre>
+        </td>
+        <td>
+          <pre>
+            <code>
+{
+  "user": {
+      "_id": "630627d457b81ef6899eefb1",
+      "Username": "GuyMannington",
+      "Password": "pass2",
+      "Email": "guymannington@email.com",
+      "Birthday": "1990-01-01T00:00:00.000Z",
+      "FavoriteMovies": [
+          "6306247557b81ef6899eefa9",
+          "630624e157b81ef6899eefae",
+          "6306241657b81ef6899eefa7"
+      ]
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI..."
+}
+            </code>
+          </pre>
+        </td>
+        <td>Basic HTTP authentication</td>
+      </tr>
+
+    </table>
+
+
+  </body>
+
+  </html>
